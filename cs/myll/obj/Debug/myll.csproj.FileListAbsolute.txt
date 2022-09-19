@@ -1,0 +1,15 @@
+E:\phielcy\bitmap\myll\bin\Debug\myll.dll
+E:\phielcy\bitmap\myll\bin\Debug\myll.pdb
+E:\phielcy\bitmap\myll\obj\Debug\myll.csprojResolveAssemblyReference.cache
+E:\phielcy\bitmap\myll\obj\Debug\myll.dll
+E:\phielcy\bitmap\myll\obj\Debug\myll.pdb
+D:\phielcy\bitmap\myll\bin\Debug\myll.dll
+D:\phielcy\bitmap\myll\bin\Debug\myll.pdb
+D:\phielcy\bitmap\myll\obj\Debug\myll.csprojResolveAssemblyReference.cache
+D:\phielcy\bitmap\myll\obj\Debug\myll.dll
+D:\phielcy\bitmap\myll\obj\Debug\myll.pdb
+D:\phielcy\libs\myll\bin\Debug\myll.dll
+D:\phielcy\libs\myll\bin\Debug\myll.pdb
+D:\phielcy\libs\myll\obj\Debug\myll.csprojResolveAssemblyReference.cache
+D:\phielcy\libs\myll\obj\Debug\myll.dll
+D:\phielcy\libs\myll\obj\Debug\myll.pdb

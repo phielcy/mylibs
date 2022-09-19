@@ -1,0 +1,107 @@
+[ STUDIO ]
+----------------------------------------------
+
+[001] 2D project-group: (gray)
+
+[ mvp ]	[01] bitmap (bitmap/camera/cmd/script)
+[ mvp ]	[02] vector (cmd/scrip/industerial/cnc)
+[ mvp ]	[03] animator (2d-matrice/skeleton/char.-design/timeline-animation/motion-capture)
+	[04] game2D (game/simulation/project-programmin)
+
+
+
+
+[002] 3D project-group: (red)
+
+[ mvp ]	[05] voxel (wall/block/octree management)
+[ mvp ]	[06] modeller (linear-path/rotational extruder)
+[ mvp ]	[07] scen3D (skelton3D:arm-hinge/joint, animator3D, game3D)
+
+
+
+
+[003] common-in-all project-group: (orange)
+
+[ mvp ]	[08] mylibs (myui, myll, ...)
+[ mvp ]	[09] dos.ui (command-line, command-builder, parameter-control, ...)
+[ mvp ]	[10] pycib (mypy, interpreter with graphical and text debug tool and memory structure views with edit ablity...)
+[ mvp ]	[11] mynet (assuredUDP, ...)
+[ mvp ]	[12] proto (file-format/protocols-viewer)
+
+
+
+
+[004] sound project-group: (yellow)
+
+[ mvp ]	[13] recorder (sb record, clc record, stream... )
+	[14] analyzer (FFT, vbf, spectrum, ...)
+	[15] synthesizer (music/midi, mixer, ...)
+	[16] voicegen (humanoid voice generator)
+
+
+
+
+[005] camera project-group: (green)
+
+[ mvp ]	[17] still (imagecapture, pixel diff. video streammer, ...)
+	[18] image (image processor: bulk, spot, object finder, ...)
+
+
+
+
+
+
+
+[ AI ]
+----------------------------------------------
+
+[006] text/language project-group: (cyan)
+
+	[19] pat.intext (index texts and search with auto correction, tools for working with text patternsm ...)
+	[20] mlingu (manual language builder using c-buya syntax for human-like language structures)
+	[21] pnlp (pseudo NLP a.k.a penelope) plus symantic tree cyclic multiple up-down parser
+		(automatic/manual ML powered SNLP / minooglyph)
+
+
+
+
+
+
+
+[ SERVER ]
+----------------------------------------------
+
+[007] server project-group: (blue)
+
+[ mvp ]	[22] server development (.NET service/winapp, ...)
+[ mvp ]	[23] webapp and maintenance (web app, DB, CDN, SEC, SEO, Soci-Nets, ...)
+
+
+
+
+
+
+
+[ we-ARE ]
+----------------------------------------------
+
+[008] weARE project-group: (purple)
+
+[ mvp ]	[24] weARE
+	[25] web.vu (+java applet)
+	[26] we-Art (3D scanner, vr-handle, motion capture, ...)
+
+
+
+
+
+
+
+
+
+
+
+
+______________________
+
+8:26 PM 8/26/2022

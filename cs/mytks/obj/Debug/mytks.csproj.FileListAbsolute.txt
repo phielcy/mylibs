@@ -1,0 +1,10 @@
+D:\phielcy\common\mylibs\cs\mytools\bin\Debug\mytks.dll
+D:\phielcy\common\mylibs\cs\mytools\bin\Debug\mytks.pdb
+D:\phielcy\common\mylibs\cs\mytools\obj\Debug\mytks.csprojResolveAssemblyReference.cache
+D:\phielcy\common\mylibs\cs\mytools\obj\Debug\mytks.dll
+D:\phielcy\common\mylibs\cs\mytools\obj\Debug\mytks.pdb
+D:\phielcy\common\mylibs\cs\mytks\bin\Debug\mytks.dll
+D:\phielcy\common\mylibs\cs\mytks\bin\Debug\mytks.pdb
+D:\phielcy\common\mylibs\cs\mytks\obj\Debug\mytks.csprojResolveAssemblyReference.cache
+D:\phielcy\common\mylibs\cs\mytks\obj\Debug\mytks.dll
+D:\phielcy\common\mylibs\cs\mytks\obj\Debug\mytks.pdb

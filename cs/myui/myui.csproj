@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{BFEB5821-B3DA-4606-A249-E90D2D1BAAA5}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>myui</RootNamespace>
+    <AssemblyName>myui</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <NoWin32Manifest>False</NoWin32Manifest>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="as_listview.cs" />
+    <Compile Include="color_track.cs" />
+    <Compile Include="dd_button.cs" />
+    <Compile Include="iconlist_item.cs">
+      <DependentUpon>icon_list.cs</DependentUpon>
+    </Compile>
+    <Compile Include="icon_list.cs" />
+    <Compile Include="layerbox_layer.cs">
+      <DependentUpon>layer_box.cs</DependentUpon>
+    </Compile>
+    <Compile Include="layer_box.cs" />
+    <Compile Include="my_canvas.cs" />
+    <Compile Include="my_form.Control.cs">
+      <DependentUpon>my_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="my_form_header.cs" />
+    <Compile Include="my_form.Sizable.cs">
+      <DependentUpon>my_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="my_parent_form.cs" />
+    <Compile Include="my_form.cs" />
+    <Compile Include="ruler_h.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ns_button.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ruler_base.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ruler_v.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="sep_h.cs" />
+    <Compile Include="sep_v.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="sw_button.cs" />
+    <Compile Include="undo_box.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\myll\myll.csproj">
+      <Project>{E36DCFE3-32A4-4CBC-8F7B-0BBA2C506562}</Project>
+      <Name>myll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mytks\mytks.csproj">
+      <Project>{1AB70B81-0FB3-4192-AA30-5CEE506F050F}</Project>
+      <Name>mytks</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="my_form.Magnet.cs">
+      <DependentUpon>my_form.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
