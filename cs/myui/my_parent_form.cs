@@ -28,7 +28,6 @@ namespace myui
 		public List<my_form> child_forms = null;
 		
 		public Control doc_control = null;
-		public Bitmap doc_bitmap = null;
 		
 		public int magnet_space = 5;
 		public int magnet_space_effect_field = 20;
@@ -38,14 +37,12 @@ namespace myui
 		public int magnet_margin_right;
 		public int magnet_margin_bottom;
 		
-		//public my_canvas canvas;
 		
 		
 		
 		public my_parent_form()
 		{
 			
-			//this.canvas = new myui.my_canvas();
 			child_forms = new List<my_form> ( );
 			
 		}
