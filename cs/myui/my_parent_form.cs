@@ -38,14 +38,14 @@ namespace myui
 		public int magnet_margin_right;
 		public int magnet_margin_bottom;
 		
-		public my_canvas canvas;
+		//public my_canvas canvas;
 		
 		
 		
 		public my_parent_form()
 		{
 			
-			this.canvas = new myui.my_canvas();
+			//this.canvas = new myui.my_canvas();
 			child_forms = new List<my_form> ( );
 			
 		}

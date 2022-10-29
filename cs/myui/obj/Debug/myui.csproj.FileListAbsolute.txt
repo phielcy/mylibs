@@ -29,8 +29,8 @@ D:\phielcy\common\mylibs\cs\myui\bin\Debug\myui.dll
 D:\phielcy\common\mylibs\cs\myui\bin\Debug\myui.pdb
 D:\phielcy\common\mylibs\cs\myui\bin\Debug\myll.dll
 D:\phielcy\common\mylibs\cs\myui\bin\Debug\mytks.dll
-D:\phielcy\common\mylibs\cs\myui\bin\Debug\mytks.pdb
 D:\phielcy\common\mylibs\cs\myui\bin\Debug\myll.pdb
+D:\phielcy\common\mylibs\cs\myui\bin\Debug\mytks.pdb
 D:\phielcy\common\mylibs\cs\myui\obj\Debug\myui.csprojResolveAssemblyReference.cache
 D:\phielcy\common\mylibs\cs\myui\obj\Debug\myui.dll
 D:\phielcy\common\mylibs\cs\myui\obj\Debug\myui.pdb

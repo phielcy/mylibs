@@ -13,3 +13,8 @@ D:\phielcy\libs\myll\bin\Debug\myll.pdb
 D:\phielcy\libs\myll\obj\Debug\myll.csprojResolveAssemblyReference.cache
 D:\phielcy\libs\myll\obj\Debug\myll.dll
 D:\phielcy\libs\myll\obj\Debug\myll.pdb
+D:\phielcy\common\mylibs\cs\myll\bin\Debug\myll.dll
+D:\phielcy\common\mylibs\cs\myll\bin\Debug\myll.pdb
+D:\phielcy\common\mylibs\cs\myll\obj\Debug\myll.csprojResolveAssemblyReference.cache
+D:\phielcy\common\mylibs\cs\myll\obj\Debug\myll.dll
+D:\phielcy\common\mylibs\cs\myll\obj\Debug\myll.pdb
