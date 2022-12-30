@@ -47,13 +47,21 @@ namespace mytools
 			Size s = r.Size;
 			
 			if (s.Width < 0) {
-				p.X = p.X + s.Width;
-				s.Width = -s.Width;
+				p.X = p.X + s.Width - 1;
+				s.Width = -s.Width + 2;
 			}
 			
 			if (s.Height < 0) {
-				p.Y = p.Y + s.Height;
-				s.Height = -s.Height;
+				p.Y = p.Y + s.Height - 1;
+				s.Height = -s.Height + 2;
+			}
+			
+			if (s.Width == 0 ) {
+				s.Width = 1;
+			}
+			
+			if (s.Height == 0 ) {
+				s.Height = 1;
 			}
 			
 			Rectangle r2 = new Rectangle(p, s);
