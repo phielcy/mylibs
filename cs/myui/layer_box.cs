@@ -183,9 +183,9 @@ namespace myui
 		}
 		
 		
-		public void remove_layer(layerbox_layer l) {
+		public void remove_layer(layerbox_layer l, bool enforce_to_remove) {
 			
-			if (this.NeverRemoveBackgroundLayer  &&  l.IsBackground) {
+			if (this.NeverRemoveBackgroundLayer  &&  l.IsBackground  &&  !enforce_to_remove) {
 				// TODO: do something to warn developer or user
 				return;
 			}
@@ -213,6 +213,16 @@ namespace myui
 				this.SelectedLayer = null;
 			
 			this.events_enabled = true;
+			
+		}
+		
+		
+		
+		public void remove_all_layers() {
+			
+			while (this.layers.Count > 0) {
+				this.remove_layer(this.layers[0], true);
+			}
 			
 		}
 		
