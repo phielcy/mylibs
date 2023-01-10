@@ -18,7 +18,7 @@ namespace myui
 	/// <summary>
 	/// Description of layerbox_layer.
 	/// </summary>
-	public class layerbox_layer : Control
+	public class layerbox_item : Control
 	{
 		
 		
@@ -54,7 +54,10 @@ namespace myui
 		public Label label = null;
 		public Point animate_final_pos;
 		
-		public layerbox_layer(layer_box parent_layerbox, Bitmap bitmap) {
+		public object bounded_object;
+		
+		
+		public layerbox_item(layer_box parent_layerbox, Bitmap bitmap) {
 			
 //			this.generate_bitmap(bmp_width, bmp_height, color);
 			this.bitmap = bitmap;
@@ -125,7 +128,7 @@ namespace myui
 			if (this.parent_layerbox != null  &&  this.parent_layerbox.events_enabled) {
 				
 				LayerBoxEventArgs args = new LayerBoxEventArgs();
-				args.layer = this;
+				args.layerbox_item = this;
 				this.parent_layerbox.__invoke_layer_checkbox_changed_event(this, args);
 				
 			}
@@ -182,7 +185,7 @@ namespace myui
 				Point diff = mygeo.point_diff(Cursor.Position, this.mouse_down_point);
 				this.Location = new Point(this.Location.X, this.mouse_down_location.Y + diff.Y);
 				
-				layerbox_layer near_layer = parent_layerbox.find_near_layer_to_this(this);
+				layerbox_item near_layer = parent_layerbox.find_near_layer_to_this(this);
 				
 				if (near_layer != null) {
 					

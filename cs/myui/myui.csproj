@@ -65,7 +65,7 @@
       <DependentUpon>icon_list.cs</DependentUpon>
     </Compile>
     <Compile Include="icon_list.cs" />
-    <Compile Include="layerbox_layer.cs">
+    <Compile Include="layerbox_item.cs">
       <DependentUpon>layer_box.cs</DependentUpon>
     </Compile>
     <Compile Include="layer_box.cs" />
