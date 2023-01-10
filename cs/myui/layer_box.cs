@@ -18,11 +18,11 @@ namespace myui
 	
 	
 	public class LayerBoxEventArgs : EventArgs {
-		public layerbox_layer layer;
+		public layerbox_item layerbox_item;
 	}
 	
 	public class LayerBoxSwapLayersEventArgs : EventArgs {
-		public layerbox_layer layer1, layer2;
+		public layerbox_item layer1, layer2;
 	}
 	
 	public delegate void LayerBoxEventHandler(object sender, LayerBoxEventArgs e);
@@ -41,7 +41,7 @@ namespace myui
 		public TextureBrush chessboard_texture_brush;
 		
 		
-		public List<layerbox_layer> layers = null;
+		public List<layerbox_item> items = null;
 		public int default_layer_height = 45;
 		
 		private bool never_remove_background_layer = false;
@@ -53,11 +53,11 @@ namespace myui
 		}
 		
 		private Timer timer_animation = null;
-		private List<layerbox_layer> to_be_animated = null;
+		private List<layerbox_item> to_be_animated = null;
 		private int animation_step = 5;
 		
-		private layerbox_layer _selected_layer = null;
-		public layerbox_layer SelectedLayer {
+		private layerbox_item _selected_layer = null;
+		public layerbox_item SelectedLayer {
 			get {return this._selected_layer;}
 			set {this._selected_layer = value;
 				//Debug.WriteLine("layer_box.cs: selected_layer_index = " + this.SelectedLayerIndex);
@@ -70,7 +70,7 @@ namespace myui
 				if (this._selected_layer == null)
 					return -1;
 				else
-					return this.layers.IndexOf(this._selected_layer);
+					return this.items.IndexOf(this._selected_layer);
 				
 			}
 		}
@@ -84,6 +84,7 @@ namespace myui
 		
 		public event LayerBoxEventHandler     LayerAdded = null;
 		public event LayerBoxEventHandler     LayerGoingToRemove = null;
+		public event LayerBoxEventHandler     LayerRemoved = null;
 		public event LayerBoxSwapEventHandler LayersSwapped = null;
 		public event LayerBoxEventHandler     LayerVisibleCheckboxCheckedChanged = null;
 		
@@ -101,9 +102,9 @@ namespace myui
 			
 			this.chessboard_texture_brush = mygraph.make_chesserboard_texture_brush(4);
 			this.DoubleBuffered = true;
-			this.layers = new List<layerbox_layer> ( );
+			this.items = new List<layerbox_item> ( );
 			this.AutoScroll = true;
-			this.to_be_animated = new List<layerbox_layer> ( );
+			this.to_be_animated = new List<layerbox_item> ( );
 			this.timer_animation = new Timer();
 			this.timer_animation.Interval = 1;
 			this.timer_animation.Tick += new EventHandler(layer_box_Tick);
@@ -114,7 +115,7 @@ namespace myui
 		
 		
 		
-		public void add_to_animation_list(layerbox_layer l, bool start_immediately) {
+		public void add_to_animation_list(layerbox_item l, bool start_immediately) {
 			
 			this.to_be_animated.Add(l);
 			if (start_immediately  &&  !this.timer_animation.Enabled)
@@ -132,9 +133,9 @@ namespace myui
 				
 			} else {
 				
-				List<layerbox_layer> to_be_removed = new List<layerbox_layer> ( );
+				List<layerbox_item> to_be_removed = new List<layerbox_item> ( );
 				
-				foreach (layerbox_layer l in this.to_be_animated) {
+				foreach (layerbox_item l in this.to_be_animated) {
 					
 					Point diff = mygeo.point_diff(l.animate_final_pos, l.Location);
 					int diff_y_sign = +1;
@@ -148,7 +149,7 @@ namespace myui
 					
 				}
 				
-				foreach (layerbox_layer l in to_be_removed)
+				foreach (layerbox_item l in to_be_removed)
 					this.to_be_animated.Remove(l);
 				
 			}
@@ -158,21 +159,22 @@ namespace myui
 		
 		
 		
-		public layerbox_layer add_layer_at(int pos, string title, Bitmap bmp) {
+		public layerbox_item add_layer_at(int pos, string title, Bitmap bmp, object bounded_object) {
 			
-			layerbox_layer l = new layerbox_layer(this, bmp);
+			layerbox_item l = new layerbox_item(this, bmp);
+			l.bounded_object = bounded_object; // shoja: must be here, not after this.LayerAdded.Invoke in next two ifs
 			l.label.Text = title;
-			this.layers.Insert(pos, l);
-			if (this.layers.Count > 1)
-				l.Top = this.layers[pos + 1].Top;
+			this.items.Insert(pos, l);
+			if (this.items.Count > 1)
+				l.Top = this.items[pos + 1].Top;
 			l.isSelected = true;
 			this.rearrange_all_layers();
-			if (this.layers.Count == 1)
+			if (this.items.Count == 1)
 				l.isSelected = true;
 			
 			if (this.events_enabled  &&  this.LayerAdded != null) {
 				LayerBoxEventArgs args = new LayerBoxEventArgs();
-				args.layer = l;
+				args.layerbox_item = l;
 				this.LayerAdded.Invoke(this, args);
 			}
 			
@@ -183,7 +185,7 @@ namespace myui
 		}
 		
 		
-		public void remove_layer(layerbox_layer l, bool enforce_to_remove) {
+		public void remove_layer(layerbox_item l, bool enforce_to_remove) {
 			
 			if (this.NeverRemoveBackgroundLayer  &&  l.IsBackground  &&  !enforce_to_remove) {
 				// TODO: do something to warn developer or user
@@ -192,25 +194,31 @@ namespace myui
 			
 			if (this.events_enabled  &&  this.LayerGoingToRemove != null) {
 				LayerBoxEventArgs args = new LayerBoxEventArgs();
-				args.layer = l;
+				args.layerbox_item = l;
 				this.LayerGoingToRemove.Invoke(this, args);
 			}
 			
 			if (l == null) return;
 			int seleted_layer_index = -1;
 			if (l == this.SelectedLayer)
-				seleted_layer_index = this.layers.IndexOf(l);
+				seleted_layer_index = this.items.IndexOf(l);
 			this.Controls.Remove(l);
-			this.layers.Remove(l);
+			this.items.Remove(l);
 			
-			if (seleted_layer_index >= 0  &&  this.layers.Count > 0) {
-				if (seleted_layer_index > this.layers.Count-1)
-					seleted_layer_index = this.layers.Count-1;
-				this.layers[seleted_layer_index].isSelected = true;
+			if (seleted_layer_index >= 0  &&  this.items.Count > 0) {
+				if (seleted_layer_index > this.items.Count-1)
+					seleted_layer_index = this.items.Count-1;
+				this.items[seleted_layer_index].isSelected = true;
 				this.rearrange_all_layers();
 			}
 			else
 				this.SelectedLayer = null;
+			
+			if (this.events_enabled  &&  this.LayerRemoved != null) {
+				LayerBoxEventArgs args = new LayerBoxEventArgs();
+				args.layerbox_item = l;
+				this.LayerRemoved.Invoke(this, args);
+			}
 			
 			this.events_enabled = true;
 			
@@ -220,21 +228,21 @@ namespace myui
 		
 		public void remove_all_layers() {
 			
-			while (this.layers.Count > 0) {
-				this.remove_layer(this.layers[0], true);
+			while (this.items.Count > 0) {
+				this.remove_layer(this.items[0], true);
 			}
 			
 		}
 		
 		
 		
-		public void swap_layers_in_list(layerbox_layer l1, layerbox_layer l2) {
+		public void swap_layers_in_list(layerbox_item l1, layerbox_item l2) {
 			
-			int i1 = this.layers.IndexOf(l1);
-			int i2 = this.layers.IndexOf(l2);
-			layerbox_layer swap_temp = this.layers[i1];
-			this.layers[i1] = this.layers[i2];
-			this.layers[i2] = swap_temp;
+			int i1 = this.items.IndexOf(l1);
+			int i2 = this.items.IndexOf(l2);
+			layerbox_item swap_temp = this.items[i1];
+			this.items[i1] = this.items[i2];
+			this.items[i2] = swap_temp;
 			
 			if (this.events_enabled  &&  this.LayersSwapped != null) {
 				LayerBoxSwapLayersEventArgs args = new LayerBoxSwapLayersEventArgs();
@@ -249,7 +257,7 @@ namespace myui
 		
 		
 		
-		public void __invoke_layer_checkbox_changed_event(layerbox_layer layer, LayerBoxEventArgs args) {
+		public void __invoke_layer_checkbox_changed_event(layerbox_item layer, LayerBoxEventArgs args) {
 			
 			if ( this.events_enabled  &&  this.LayerVisibleCheckboxCheckedChanged != null )
 				this.LayerVisibleCheckboxCheckedChanged.Invoke(layer, args);
@@ -261,7 +269,7 @@ namespace myui
 		public void rearrange_all_layers() {
 			
 			int top = 0;
-			foreach (layerbox_layer l in this.layers) {
+			foreach (layerbox_item l in this.items) {
 				l.animate_to_pos(new Point(l.Location.X, top), false);
 				top += default_layer_height;
 			}
@@ -274,11 +282,11 @@ namespace myui
 		
 		
 		private bool is_in_deselect_all_process = false;
-		public void deselect_others_but_this_layer(layerbox_layer layer) {
+		public void deselect_others_but_this_layer(layerbox_item layer) {
 			
 			if (this.is_in_deselect_all_process) return;
 			this.is_in_deselect_all_process = true;
-			foreach (layerbox_layer l in this.layers)
+			foreach (layerbox_item l in this.items)
 				if (l != layer) l.isSelected = false;
 			this.is_in_deselect_all_process = false;
 			
@@ -286,9 +294,9 @@ namespace myui
 		
 		
 		
-		public layerbox_layer find_near_layer_to_this(layerbox_layer l) {
+		public layerbox_item find_near_layer_to_this(layerbox_item l) {
 			
-			foreach (layerbox_layer l2 in this.layers) {
+			foreach (layerbox_item l2 in this.items) {
 				if (!this.to_be_animated.Contains(l2)  &&  l2 != l  &&  mymath.absi(l2.Location.Y-l.Location.Y) < this.default_layer_height / 3)
 					return l2;
 			}
